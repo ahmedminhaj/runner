@@ -5,17 +5,23 @@ class SceneOver extends Phaser.Scene{
     preload(){
         this.load.image("button1", "images/ui/buttons/1/1.png")
         this.load.image("title", "images/title.png")
+        this.load.image("gameOver", "images/Game-Over.png")
     }
     create(){
         this.alignGrid = new AlignGrid({rows:11, cols:11, scene:this})
-        // this.alignGrid.showNumbers()
-        
-        // var title = this.add.image(0,0, 'title')
-        // Align.scaleToGameW(title, .5)
-        // this.alignGrid.placeAtIndex(38,title)
+        //this.alignGrid.showNumbers()
+        this.backImage = this.add.image(game.config.width/2, game.config.height/2, "titleBack")
+
+        var gameOver = this.add.image(0,0, 'gameOver')
+        Align.scaleToGameW(gameOver, .5)
+        this.alignGrid.placeAtIndex(27,gameOver)
+
+        this.scoreBox = new ScoreBox({scene:this})
+        Align.scaleToGameW(this.scoreBox, 1.5)
+        this.alignGrid.placeAtIndex(38,this.scoreBox)
 
         var btnStart = new FlatButton({scene:this, key:"button1", text:'Play Again', event:'start_game'})
-        this.alignGrid.placeAtIndex(60, btnStart)
+        this.alignGrid.placeAtIndex(71, btnStart)
 
         emitter.on('start_game', this.startGame, this)
     }

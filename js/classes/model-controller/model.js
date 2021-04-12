@@ -7,7 +7,8 @@ class Model{
     }
     set musicOn(val){
         this._musicOn = val
-        emitter.emit(G.MUSIC_CHANGED)
+        mediaManager.MusicChanged()
+        //emitter.emit(G.MUSIC_CHANGED)
     }
     get musicOn(){
         return this._musicOn

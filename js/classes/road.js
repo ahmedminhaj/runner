@@ -44,7 +44,8 @@ class Road extends Phaser.GameObjects.Container{
         if(model.gameOver == true){
             return
         }
-        emitter.emit(G.PLAY_SOUND, "whoosh")
+        mediaManager.playSound("whoosh")
+        //emitter.emit(G.PLAY_SOUND, "whoosh")
         if(this.car.x>0){
             this.car.x =- this.displayWidth/4
         }else{
@@ -84,7 +85,7 @@ class Road extends Phaser.GameObjects.Container{
         if(model.gameOver == true){
             return
         }
-        this.object.y += this.vSpace / this.object.speed
+        this.object.y += (this.vSpace / this.object.speed)*model.speed
         if(Collision.checkCollide(this.car, this.object)==true){
             // this.car.alpha = 0.5
             model.gameOver = true
