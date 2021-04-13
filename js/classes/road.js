@@ -45,11 +45,26 @@ class Road extends Phaser.GameObjects.Container{
             return
         }
         mediaManager.playSound("whoosh")
-        //emitter.emit(G.PLAY_SOUND, "whoosh")
         if(this.car.x>0){
-            this.car.x =- this.displayWidth/4
+            this.scene.tweens.add({
+                targets:this.car, 
+                duration:50, 
+                angle:-12, 
+                onComplete: ()=>{
+                    this.car.x =- this.displayWidth/4
+                    this.scene.tweens.add({targets:this.car, duration:50, angle:0,})
+                }
+            })
         }else{
-            this.car.x = this.displayWidth/4
+            this.scene.tweens.add({
+                targets:this.car, 
+                duration:50, 
+                angle:12, 
+                onComplete: ()=>{
+                    this.car.x = this.displayWidth/4
+                    this.scene.tweens.add({targets:this.car, duration:50, angle:0,})
+                }
+            })
         }
     }
 

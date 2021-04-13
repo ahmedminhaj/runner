@@ -16,9 +16,9 @@ class SceneOver extends Phaser.Scene{
         Align.scaleToGameW(gameOver, .5)
         this.alignGrid.placeAtIndex(27,gameOver)
 
-        this.scoreBox = new ScoreBox({scene:this})
-        Align.scaleToGameW(this.scoreBox, 1.5)
-        this.alignGrid.placeAtIndex(38,this.scoreBox)
+        this.totalScore = this.add.text(0,0, "SCORE:"+model.score, {fontSize:24, color:'black'})
+        this.totalScore.setOrigin(0.5, 0.5)
+        this.alignGrid.placeAtIndex(38, this.totalScore)
 
         var btnStart = new FlatButton({scene:this, key:"button1", text:'Play Again', event:'start_game'})
         this.alignGrid.placeAtIndex(71, btnStart)
