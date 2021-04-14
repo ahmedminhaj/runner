@@ -14,6 +14,9 @@ class SceneLoad extends Phaser.Scene {
     	this.load.image("police1", "images/pcar1.png");
     	this.load.image("police2", "images/pcar2.png");
     	this.load.image("barrier", "images/barrier.png");
+    	this.load.image("cone", "images/cone.png");
+    	this.load.image("boost", "images/boost.png");
+    	this.load.image("shield", "images/shield.png");
         this.load.image("line", "images/line.png")
         this.load.image("titleBack", "images/titleBack.jpg")
         this.load.image("button1", "images/ui/buttons/1/1.png")

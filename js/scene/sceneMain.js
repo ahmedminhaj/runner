@@ -39,6 +39,7 @@ class SceneMain extends Phaser.Scene {
     update() {
         this.road.moveLines()
         this.road.moveObject()
+        this.road.movePower()
     }
 
 }

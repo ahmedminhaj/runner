@@ -21,11 +21,17 @@ class Road extends Phaser.GameObjects.Container{
         this.back.setInteractive()
         this.back.on('pointerdown', this.changeLanes, this)
         this.addObject()
+        this.addPower()
+        
+    }
+
+    addPower(){
+        this.scene.time.addEvent({ delay: 5000, callback: this.createPower, callbackScope: this, loop:false});
     }
 
     addObject(){
-        var objs = [{key:"police1", speed:10, scale:10}, {key:"police2", speed:10, scale:10}, {key:"barrier", speed:20, scale:8}]
-        var index = Math.floor(Math.random()*3)
+        var objs = [{key:"police1", speed:10, scale:10}, {key:"police2", speed:10, scale:10}, {key:"barrier", speed:20, scale:8}, {key:"cone", speed:20, scale:8}]
+        var index = Math.floor(Math.random()*4)
         var key = objs[index].key
         var speed = objs[index].speed
         var scale = objs[index].scale/100
@@ -38,6 +44,23 @@ class Road extends Phaser.GameObjects.Container{
         }
         Align.scaleToGameW(this.object, scale)
         this.add(this.object)
+    }
+
+    createPower(){
+        var items = [{key:"shield", speed:16, scale:6}, {key:"boost", speed:16, scale:8}]
+        var index = Math.floor(Math.random()*2)
+        var key = items[index].key
+        var speed = items[index].speed
+        var scale = items[index].scale/100
+
+        this.power = this.scene.add.sprite(-this.displayWidth/4, 0, key)
+        this.power.speed = speed
+        var lane = Math.random()*100
+        if(lane<50){
+            this.power.x = this.displayWidth/4
+        }
+        Align.scaleToGameW(this.power, scale)
+        this.add(this.power)
     }
 
     changeLanes(){
@@ -113,6 +136,21 @@ class Road extends Phaser.GameObjects.Container{
             emitter.emit(G.UP_POINTS, 1)
             this.object.destroy()
             this.addObject()
+        }
+    }
+
+    movePower(){
+        if(model.gameOver == true){
+            return
+        }
+        if(this.power == undefined){
+            return
+        }else{
+            this.power.y += (this.vSpace / this.power.speed)
+            if(this.power.y > game.config.height){
+                this.power.destroy()
+                this.addPower()
+            }
         }
     }
 }
