@@ -2,7 +2,7 @@ class MediaManager{
     constructor(config){
         this.scene = config.scene
         emitter.on(G.PLAY_SOUND, this.playSound, this)
-        emitter.on(G.MUSIC_CHANGED, this.musicChanged, this)
+        emitter.on(G.PLAY_MUSIC, this.musicChanged, this)
     }
     musicChanged(){
         if(this.background){
@@ -20,8 +20,8 @@ class MediaManager{
         }
     }
     setBackgroundMusic(key){
-        if(model.soundOn == true){
-            this.background = this.scene.sound.add(key,{volume:.25, loop:true})
+        if(model.musicOn == true){
+            this.background = this.scene.sound.add(key,{volume:.15, loop:true})
             this.background.play()
         }
     }

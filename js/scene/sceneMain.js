@@ -21,15 +21,12 @@ class SceneMain extends Phaser.Scene {
        this.scoreBox = new ScoreBox({scene:this})
        this.alignGrid.placeAtIndex(4, this.scoreBox)
 
-       var soundButtons = new SoundButtons({scene:this})
+       new SoundButtons({scene:this})
        emitter.on(G.SCORE_UPDATED, this.scoreUpdated, this)
     }
     scoreUpdated(){
-        if(model.score/5 == Math.floor(model.score/5)){
+        if(model.score/10 == Math.floor(model.score/10)){
             model.speed += .25
-            if(model.speed>1.5){
-                model.speed = 1.5
-            }
         }
     }
     gameOver(){

@@ -4,11 +4,14 @@ class Model{
         this.soundOn = true
         this._musicOn = true
         this.gameOver = false
+        this.shieldPower = false
+        this.boostPower = false
     }
     set musicOn(val){
         this._musicOn = val
-        mediaManager.MusicChanged()
-        //emitter.emit(G.MUSIC_CHANGED)
+        //mediaManager.MusicChanged()
+        console.log(val)
+        emitter.emit(G.PLAY_MUSIC)
     }
     get musicOn(){
         return this._musicOn
